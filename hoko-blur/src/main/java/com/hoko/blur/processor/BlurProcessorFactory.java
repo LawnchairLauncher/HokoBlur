@@ -10,9 +10,6 @@ class BlurProcessorFactory {
         BlurProcessor generator = null;
 
         switch (scheme) {
-            case HokoBlur.SCHEME_RENDER_SCRIPT:
-                generator = new RenderScriptBlurProcessor(builder);
-                break;
             case HokoBlur.SCHEME_OPENGL:
                 generator = new OpenGLBlurProcessor(builder);
                 break;

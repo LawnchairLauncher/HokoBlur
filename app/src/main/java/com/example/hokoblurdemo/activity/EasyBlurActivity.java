@@ -26,7 +26,7 @@ public class EasyBlurActivity extends AppCompatActivity {
 
         imageView.setImageBitmap(HokoBlur.with(this)
                 .forceCopy(true)
-                .scheme(HokoBlur.SCHEME_RENDER_SCRIPT)
+                .scheme(HokoBlur.SCHEME_JAVA)
                 .sampleFactor(3.0f)
                 .radius(20)
                 .processor()
@@ -90,7 +90,7 @@ public class EasyBlurActivity extends AppCompatActivity {
             @Override
             public void run() {
                 HokoBlur.with(EasyBlurActivity.this)
-                        .scheme(HokoBlur.SCHEME_RENDER_SCRIPT)
+                        .scheme(HokoBlur.SCHEME_NATIVE)
                         .processor()
                         .newBuilder()
                         .processor()

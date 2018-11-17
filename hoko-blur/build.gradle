@@ -10,9 +10,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        renderscriptTargetApi rootProject.ext.renderscriptTargetApi
-        renderscriptSupportModeEnabled true
-
         externalNativeBuild {
             cmake {
                 arguments '-DANDROID_PLATFORM=android-19', '-DANDROID_TOOLCHAIN=clang'
