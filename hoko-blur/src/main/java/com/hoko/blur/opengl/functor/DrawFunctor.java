@@ -106,8 +106,7 @@ public class DrawFunctor {
     private void onDraw(final GLInfo info) {
 //        Log.i("DrawFunctor", "onDraw: " + info);
         boolean isChildRedraw;
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT
-                && mParentGLInfo != null && mParentGLInfo.contains(info)) {
+        if (mParentGLInfo != null && mParentGLInfo.contains(info)) {
             isChildRedraw = true;
         } else {
             mParentGLInfo = info;

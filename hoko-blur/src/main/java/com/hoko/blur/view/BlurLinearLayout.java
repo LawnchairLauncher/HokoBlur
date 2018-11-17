@@ -3,7 +3,6 @@ package com.hoko.blur.view;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.hoko.blur.opengl.drawable.BlurDrawable;
@@ -31,11 +30,7 @@ public class BlurLinearLayout extends LinearLayout{
 
     private void init() {
         mBlurDrawable = new BlurDrawable();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackground(mBlurDrawable);
-        } else {
-            setBackgroundDrawable(mBlurDrawable);
-        }
+        setBackground(mBlurDrawable);
     }
 
     @Override

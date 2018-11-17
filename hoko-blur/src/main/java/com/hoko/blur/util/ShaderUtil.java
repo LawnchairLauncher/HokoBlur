@@ -17,19 +17,16 @@ public class ShaderUtil {
     private static final String TAG = ShaderUtil.class.getSimpleName();
 
     public static String getVertexCode() {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("uniform mat4 uMVPMatrix;   \n")
-                .append("uniform mat4 uTexMatrix;   \n")
-                .append("attribute vec2 aTexCoord;   \n")
-                .append("attribute vec3 aPosition;  \n")
-                .append("varying vec2 vTexCoord;  \n")
-                .append("void main() {              \n")
-                .append("   gl_Position = uMVPMatrix * vec4(aPosition, 1); \n")
-                .append("   vTexCoord = (uTexMatrix * vec4(aTexCoord, 1, 1)).st;\n")
-                .append("}  \n");
-
-        return sb.toString();
+        return "uniform mat4 uMVPMatrix;   \n" +
+                "uniform mat4 uTexMatrix;   \n" +
+                "attribute vec2 aTexCoord;   \n" +
+                "attribute vec3 aPosition;  \n" +
+                "varying vec2 vTexCoord;  \n" +
+                "void main() {              \n" +
+                "   gl_Position = uMVPMatrix * vec4(aPosition, 1); \n" +
+                "   vTexCoord = (uTexMatrix * vec4(aTexCoord, 1, 1)).st;\n" +
+                "}  \n";
 
     }
 
@@ -95,24 +92,20 @@ public class ShaderUtil {
      */
     private static String getGaussianSampleCode() {
 
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("   int diameter = 2 * uRadius + 1;  \n")
-                .append("   vec4 sampleTex;\n")
-                .append("   vec3 col;  \n")
-                .append("   float weightSum = 0.0; \n")
-                .append("   for(int i = 0; i < diameter; i++) {\n")
-                .append("       vec2 offset = vec2(float(i - uRadius) * uWidthOffset, float(i - uRadius) * uHeightOffset);  \n")
-                .append("       sampleTex = vec4(texture2D(uTexture, vTexCoord.st+offset));\n")
-                .append("       float index = float(i); \n")
-                .append("       float gaussWeight = getGaussWeight(index - float(diameter - 1)/2.0,")
-                .append("           (float(diameter - 1)/2.0 + 1.0) / 2.0); \n")
-                .append("       col += sampleTex.rgb * gaussWeight; \n")
-                .append("       weightSum += gaussWeight;\n")
-                .append("   }   \n")
-                .append("   gl_FragColor = vec4(col / weightSum, sampleTex.a);   \n");
-
-        return sb.toString();
+        return "   int diameter = 2 * uRadius + 1;  \n" +
+                "   vec4 sampleTex;\n" +
+                "   vec3 col;  \n" +
+                "   float weightSum = 0.0; \n" +
+                "   for(int i = 0; i < diameter; i++) {\n" +
+                "       vec2 offset = vec2(float(i - uRadius) * uWidthOffset, float(i - uRadius) * uHeightOffset);  \n" +
+                "       sampleTex = vec4(texture2D(uTexture, vTexCoord.st+offset));\n" +
+                "       float index = float(i); \n" +
+                "       float gaussWeight = getGaussWeight(index - float(diameter - 1)/2.0," +
+                "           (float(diameter - 1)/2.0 + 1.0) / 2.0); \n" +
+                "       col += sampleTex.rgb * gaussWeight; \n" +
+                "       weightSum += gaussWeight;\n" +
+                "   }   \n" +
+                "   gl_FragColor = vec4(col / weightSum, sampleTex.a);   \n";
     }
 
     /**
@@ -120,22 +113,20 @@ public class ShaderUtil {
      * So compute the weight in the code directly.
      */
     private static String getBoxSampleCode() {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("   int diameter = 2 * uRadius + 1; \n")
-                .append("   vec4 sampleTex;\n")
-                .append("   vec3 col;  \n")
-                .append("   float weightSum = 0.0; \n")
-                .append("   for(int i = 0; i < diameter; i++) {\n")
-                .append("       vec2 offset = vec2(float(i - uRadius) * uWidthOffset, float(i - uRadius) * uHeightOffset);  \n")
-                .append("        sampleTex = vec4(texture2D(uTexture, vTexCoord.st+offset));\n")
-                .append("       float index = float(i); \n")
-                .append("       float boxWeight = float(1.0) / float(diameter); \n")
-                .append("       col += sampleTex.rgb * boxWeight; \n")
-                .append("       weightSum += boxWeight;\n")
-                .append("   }   \n")
-                .append("   gl_FragColor = vec4(col / weightSum, sampleTex.a);   \n");
-        return sb.toString();
+        return "   int diameter = 2 * uRadius + 1; \n" +
+                "   vec4 sampleTex;\n" +
+                "   vec3 col;  \n" +
+                "   float weightSum = 0.0; \n" +
+                "   for(int i = 0; i < diameter; i++) {\n" +
+                "       vec2 offset = vec2(float(i - uRadius) * uWidthOffset, float(i - uRadius) * uHeightOffset);  \n" +
+                "        sampleTex = vec4(texture2D(uTexture, vTexCoord.st+offset));\n" +
+                "       float index = float(i); \n" +
+                "       float boxWeight = float(1.0) / float(diameter); \n" +
+                "       col += sampleTex.rgb * boxWeight; \n" +
+                "       weightSum += boxWeight;\n" +
+                "   }   \n" +
+                "   gl_FragColor = vec4(col / weightSum, sampleTex.a);   \n";
     }
 
     /**
@@ -143,23 +134,20 @@ public class ShaderUtil {
      * So compute the weight in the code directly.
      */
     private static String getStackSampleCode() {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("int diameter = 2 * uRadius + 1;  \n")
-                .append("   vec4 sampleTex;\n")
-                .append("   vec3 col;  \n")
-                .append("   float weightSum = 0.0; \n")
-                .append("   for(int i = 0; i < diameter; i++) {\n")
-                .append("       vec2 offset = vec2(float(i - uRadius) * uWidthOffset, float(i - uRadius) * uHeightOffset);  \n")
-                .append("       sampleTex = vec4(texture2D(uTexture, vTexCoord.st+offset));\n")
-                .append("       float index = float(i); \n")
-                .append("       float boxWeight = float(uRadius) + 1.0 - abs(index - float(uRadius)); \n")
-                .append("       col += sampleTex.rgb * boxWeight; \n")
-                .append("       weightSum += boxWeight;\n")
-                .append("   }   \n")
-                .append("   gl_FragColor = vec4(col / weightSum, sampleTex.a);   \n");
-
-        return sb.toString();
+        return "int diameter = 2 * uRadius + 1;  \n" +
+                "   vec4 sampleTex;\n" +
+                "   vec3 col;  \n" +
+                "   float weightSum = 0.0; \n" +
+                "   for(int i = 0; i < diameter; i++) {\n" +
+                "       vec2 offset = vec2(float(i - uRadius) * uWidthOffset, float(i - uRadius) * uHeightOffset);  \n" +
+                "       sampleTex = vec4(texture2D(uTexture, vTexCoord.st+offset));\n" +
+                "       float index = float(i); \n" +
+                "       float boxWeight = float(uRadius) + 1.0 - abs(index - float(uRadius)); \n" +
+                "       col += sampleTex.rgb * boxWeight; \n" +
+                "       weightSum += boxWeight;\n" +
+                "   }   \n" +
+                "   gl_FragColor = vec4(col / weightSum, sampleTex.a);   \n";
     }
 
     public static String getKernelInitCode(float[] kernel) {
@@ -173,7 +161,7 @@ public class ShaderUtil {
             sb.append("  kernel[");
             sb.append(i);
             sb.append("] = ");
-            sb.append(kernel[i] + "f; \n");
+            sb.append(kernel[i]).append("f; \n");
         }
 
         return sb.toString();
@@ -201,18 +189,16 @@ public class ShaderUtil {
      * copy the texture
      */
     public static String getCopyFragmentCode() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(" \n")
-                .append("precision mediump float;")
-                .append("varying vec2 vTexCoord;   \n")
-                .append("uniform sampler2D uTexture;   \n")
-                .append("uniform lowp float mixPercent;   \n")
-                .append("uniform vec4 vMixColor;   \n")
-                .append("void main() {   \n")
-                .append("   vec4 col = vec4(texture2D(uTexture, vTexCoord.st));\n")
-                .append("   gl_FragColor = vec4(mix(col.rgb, vMixColor.rgb, vMixColor.a * mixPercent), col.a);   \n")
-                .append("}   \n");
-        return sb.toString();
+        return " \n" +
+                "precision mediump float;" +
+                "varying vec2 vTexCoord;   \n" +
+                "uniform sampler2D uTexture;   \n" +
+                "uniform lowp float mixPercent;   \n" +
+                "uniform vec4 vMixColor;   \n" +
+                "void main() {   \n" +
+                "   vec4 col = vec4(texture2D(uTexture, vTexCoord.st));\n" +
+                "   gl_FragColor = vec4(mix(col.rgb, vMixColor.rgb, vMixColor.a * mixPercent), col.a);   \n" +
+                "}   \n";
     }
 
 
@@ -220,14 +206,12 @@ public class ShaderUtil {
      * get color fragment
      */
     public static String getColorFragmentCode() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("precision mediump float;   \n")
-                .append("uniform vec4 vColor;   \n")
-                .append("void main() {   \n")
-                .append("   gl_FragColor = vColor;   \n")
-                .append("} \n");
 
-        return sb.toString();
+        return "precision mediump float;   \n" +
+                "uniform vec4 vColor;   \n" +
+                "void main() {   \n" +
+                "   gl_FragColor = vColor;   \n" +
+                "} \n";
     }
 
 //    public static String getSampleCode(int d) {

@@ -3,7 +3,6 @@ package com.hoko.blur.api;
 import android.graphics.Bitmap;
 import android.view.View;
 
-import com.hoko.blur.anno.Scheme;
 import com.hoko.blur.task.AsyncBlurTask;
 
 import java.util.concurrent.Future;

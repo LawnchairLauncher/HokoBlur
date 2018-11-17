@@ -30,11 +30,7 @@ public class BlurFrameLayout extends FrameLayout{
 
     private void init() {
         mBlurDrawable = new BlurDrawable();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackground(mBlurDrawable);
-        } else {
-            setBackgroundDrawable(mBlurDrawable);
-        }
+        setBackground(mBlurDrawable);
     }
 
     @Override
