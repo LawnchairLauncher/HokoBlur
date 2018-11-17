@@ -2,11 +2,11 @@
 
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.2.0-rc02'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         // NOTE: Do not place your application dependencies here; they belong
@@ -16,8 +16,8 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 }
 
@@ -26,11 +26,11 @@ task clean(type: Delete) {
 }
 
 ext {
-    minSdkVersion = 15
+    minSdkVersion = 21
 
-    compileSdkVersion = 26
-    targetSdkVersion = 18
-    buildToolsVersion = "27.0.3"
+    compileSdkVersion = 28
+    targetSdkVersion = 28
+    buildToolsVersion = "28.0.3"
 
-    renderscriptTargetApi = 15
+    renderscriptTargetApi = 21
 }
