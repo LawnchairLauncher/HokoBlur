@@ -49,14 +49,9 @@ final class StackBlurFilter {
 
     private static void doHorizontalBlur(int[] pix, int w, int h, int radius) {
         int wm = w - 1;
-        int hm = h - 1;
-        int wh = w * h;
         int div = radius + radius + 1;
 
-        int[] r = new int[wh];
-        int[] g = new int[wh];
-        int[] b = new int[wh];
-        int rsum, gsum, bsum, x, y, i, p, yp, yi, yw;
+        int rsum, gsum, bsum, x, y, i, p, yi, yw;
         int[] vmin = new int[Math.max(w, h)];
 
         int divsum = (div + 1) >> 1;
@@ -103,10 +98,6 @@ final class StackBlurFilter {
             stackpointer = radius;
 
             for (x = 0; x < w; x++) {
-
-                r[yi] = dv[rsum];
-                g[yi] = dv[gsum];
-                b[yi] = dv[bsum];
 
                 pix[yi] = (0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) | dv[bsum];
 
@@ -156,7 +147,6 @@ final class StackBlurFilter {
     }
 
     private static void doVerticalBlur(int[] pix, int w, int h, int radius) {
-        int wm = w - 1;
         int hm = h - 1;
         int wh = w * h;
         int div = radius + radius + 1;
@@ -164,7 +154,7 @@ final class StackBlurFilter {
         int[] r = new int[wh];
         int[] g = new int[wh];
         int[] b = new int[wh];
-        int rsum, gsum, bsum, x, y, i, p, yp, yi, yw;
+        int rsum, gsum, bsum, x, y, i, p, yp, yi;
         int[] vmin = new int[Math.max(w, h)];
 
         int divsum = (div + 1) >> 1;
@@ -173,8 +163,6 @@ final class StackBlurFilter {
         for (i = 0; i < 256 * divsum; i++) {
             dv[i] = (i / divsum);
         }
-
-        yw = yi = 0;
 
         int[][] stack = new int[div][3];
         int stackpointer;

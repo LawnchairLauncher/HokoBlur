@@ -116,7 +116,7 @@ public abstract class BlurProcessor implements IBlurProcessor {
             mSampleFactor = 1.0f;
         }
 
-        Bitmap inBitmap = null;
+        Bitmap inBitmap;
 
         if (mIsForceCopy) {
             inBitmap = bitmap.copy(bitmap.getConfig(), true);
