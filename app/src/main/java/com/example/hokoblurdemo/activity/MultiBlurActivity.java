@@ -134,9 +134,6 @@ public class MultiBlurActivity extends AppCompatActivity implements AdapterView.
                 case 1:
                     mBlurBuilder.mode(HokoBlur.MODE_STACK);
                     break;
-                case 2:
-                    mBlurBuilder.mode(HokoBlur.MODE_BOX);
-                    break;
             }
 
         }

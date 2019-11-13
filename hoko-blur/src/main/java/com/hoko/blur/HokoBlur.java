@@ -10,7 +10,6 @@ import com.hoko.blur.processor.HokoBlurBuild;
  */
 public final class HokoBlur {
 
-    public static final int MODE_BOX = 0;
     public static final int MODE_GAUSSIAN = 1;
     public static final int MODE_STACK = 2;
 

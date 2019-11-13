@@ -58,9 +58,7 @@ public class ShaderUtil {
                 .append("} \n")
                 .append("void main() {   \n");
 
-        if (mode == HokoBlur.MODE_BOX) {
-            sb.append(ShaderUtil.getBoxSampleCode());
-        } else if (mode == HokoBlur.MODE_GAUSSIAN) {
+        if (mode == HokoBlur.MODE_GAUSSIAN) {
             sb.append(ShaderUtil.getGaussianSampleCode());
         } else if (mode == HokoBlur.MODE_STACK) {
             sb.append(ShaderUtil.getStackSampleCode());
@@ -94,29 +92,6 @@ public class ShaderUtil {
                 .append("   }   \n")
                 .append("   gl_FragColor = vec4(col / weightSum, sampleTex.a);   \n");
 
-        return sb.toString();
-    }
-
-    /**
-     * If set kernel weight array in advance, the GPU registers have no enough space.
-     * So compute the weight in the code directly.
-     */
-    private static String getBoxSampleCode() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("   int diameter = 2 * uRadius + 1; \n")
-                .append("   vec4 sampleTex = vec4(0, 0, 0, 0);\n")
-                .append("   vec3 col = vec3(0, 0, 0);  \n")
-                .append("   float weightSum = 0.0; \n")
-                .append("   for(int i = 0; i < diameter; i++) {\n")
-                .append("       vec2 offset = vec2(float(i - uRadius) * uWidthOffset, float(i - uRadius) * uHeightOffset);  \n")
-                .append("        sampleTex = vec4(texture2D(uTexture, vTexCoord.st+offset));\n")
-                .append("       float index = float(i); \n")
-                .append("       float boxWeight = float(1.0) / float(diameter); \n")
-                .append("       col += sampleTex.rgb * boxWeight; \n")
-                .append("       weightSum += boxWeight;\n")
-                .append("   }   \n")
-                .append("   gl_FragColor = vec4(col / weightSum, sampleTex.a);   \n");
         return sb.toString();
     }
 

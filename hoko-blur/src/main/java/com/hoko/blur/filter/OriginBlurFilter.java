@@ -49,10 +49,6 @@ public final class OriginBlurFilter {
         bitmap.getPixels(pixels, 0, deltaX, x, y, deltaX, deltaY);
 
         switch (mode) {
-            case HokoBlur.MODE_BOX:
-                BoxBlurFilter.doBlur(pixels, deltaX, deltaY, radius, direction);
-                break;
-
             case HokoBlur.MODE_GAUSSIAN:
                 GaussianBlurFilter.doBlur(pixels, deltaX, deltaY, radius, direction);
                 break;
@@ -77,10 +73,6 @@ public final class OriginBlurFilter {
         bitmap.getPixels(pixels, 0, w, 0, 0, w, h);
 
         switch (mode) {
-            case HokoBlur.MODE_BOX:
-                BoxBlurFilter.doBlur(pixels, w, h, radius, HokoBlur.BOTH);
-                break;
-
             case HokoBlur.MODE_GAUSSIAN:
                 GaussianBlurFilter.doBlur(pixels, w, h, radius, HokoBlur.BOTH);
                 break;
