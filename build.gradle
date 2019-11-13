@@ -6,7 +6,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         // NOTE: Do not place your application dependencies here; they belong
@@ -26,7 +26,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    minSdkVersion = 16
-    compileSdkVersion = 28
-    targetSdkVersion = 28
+    minSdkVersion = 25
+    compileSdkVersion = 29
+    targetSdkVersion = 29
 }
