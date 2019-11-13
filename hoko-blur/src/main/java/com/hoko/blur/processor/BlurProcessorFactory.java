@@ -10,9 +10,6 @@ class BlurProcessorFactory {
         BlurProcessor blurProcessor;
 
         switch (scheme) {
-            case HokoBlur.SCHEME_OPENGL:
-                blurProcessor = new OpenGLBlurProcessor(builder);
-                break;
             case HokoBlur.SCHEME_NATIVE:
                 blurProcessor = new NativeBlurProcessor(builder);
                 break;

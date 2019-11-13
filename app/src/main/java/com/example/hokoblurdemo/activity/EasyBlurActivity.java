@@ -33,7 +33,7 @@ public class EasyBlurActivity extends AppCompatActivity {
                 .radius(20)
                 .blur(bitmap));
         HokoBlur.with(this)
-                .scheme(HokoBlur.SCHEME_OPENGL)
+                .scheme(HokoBlur.SCHEME_NATIVE)
                 .translateX(150)
                 .translateY(150)
                 .forceCopy(false)
