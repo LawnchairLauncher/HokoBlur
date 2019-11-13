@@ -7,12 +7,9 @@ class BlurProcessorFactory {
 
     static BlurProcessor getBlurProcessor(@Scheme int scheme, HokoBlurBuild builder) {
 
-        BlurProcessor blurProcessor = null;
+        BlurProcessor blurProcessor;
 
         switch (scheme) {
-            case HokoBlur.SCHEME_RENDER_SCRIPT:
-                blurProcessor = new RenderScriptBlurProcessor(builder);
-                break;
             case HokoBlur.SCHEME_OPENGL:
                 blurProcessor = new OpenGLBlurProcessor(builder);
                 break;
